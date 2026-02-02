@@ -21,9 +21,9 @@ class ProfileController extends Controller
 
         $myProducts = Product::where('user_id', $user->id)->get();
 
-        $purchases = Transaction::with('product')
-            ->where('buyer_id', $user->id)
-            ->whereIn('status', [0, 1])
+        $purchases = Purchase::where('user_id', $user->id)
+            ->with('product')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $transactions = Transaction::with('product')
