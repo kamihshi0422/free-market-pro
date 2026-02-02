@@ -72,7 +72,6 @@ php artisan db:seed
 
 - `mkdir -p src/storage/app/public`
 - `mv img products_images user_images src/storage/app/public`
-- `mkdir src/storage/app/public/user_images`
 
 > _Permission denied（権限のエラー）が出た際、以下を実行してください。_
 
