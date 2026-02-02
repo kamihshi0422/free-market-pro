@@ -19,16 +19,13 @@ class ProfileController extends Controller
         $user = Auth::user();
         $page = $request->query('page','sell');
 
-        // 出品した商品
         $myProducts = Product::where('user_id', $user->id)->get();
 
-        // 購入した商品（取引中 + 完了）
         $purchases = Transaction::with('product')
             ->where('buyer_id', $user->id)
-            ->whereIn('status', [0, 1]) // 0:取引中, 1:完了
+            ->whereIn('status', [0, 1])
             ->get();
 
-        // 取引中の商品（ステータス0のみ）
         $transactions = Transaction::with('product')
             ->withCount([
                 'messages as unread_messages_count' => function ($messageQuery) {
@@ -46,7 +43,6 @@ class ProfileController extends Controller
 
         $totalUnreadMessages = $transactions->sum('unread_messages_count');
 
-        // 評価平均
         $ratingStats = Rating::where('to_user_id', $user->id)
             ->select(
                 DB::raw('COUNT(*) as count'),

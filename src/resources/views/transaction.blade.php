@@ -58,10 +58,8 @@
                     </div>
 
                     @if ($message->user_id === auth()->id())
-                        <!-- 編集用チェックボックス（隠し） -->
                         <input type="checkbox" id="edit-{{ $message->id }}" class="edit-toggle">
 
-                        <!-- 編集・削除ボタンを横並び -->
                         <div class="message-actions">
                             <label for="edit-{{ $message->id }}" class="edit-btn">編集</label>
 
@@ -76,7 +74,6 @@
                             </form>
                         </div>
 
-                        <!-- 編集フォーム（インライン） -->
                         <form
                             action="{{ route('transaction.message.update', [$currentTransaction->id, $message->id]) }}"
                             method="POST"
@@ -129,7 +126,6 @@
             <form method="POST" action="{{ $completeActionRoute }}">
                 @csrf
 
-                {{-- ★ 五段階評価 --}}
                 <div class="rating">
                     @for ($rating = 5; $rating >= 1; $rating--)
                         <input
@@ -183,14 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('complete-modal');
     const completeBtn = document.getElementById('complete-btn');
 
-    // 購入者：ボタンで開く
     if (completeBtn) {
         completeBtn.addEventListener('click', () => {
             modal?.classList.remove('hidden');
         });
     }
 
-    // 出品者：自動表示（Controller で true の時だけ）
     @if ($showCompleteModal)
         modal?.classList.remove('hidden');
     @endif

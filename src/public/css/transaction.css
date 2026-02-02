@@ -112,7 +112,6 @@
     font-weight: 400;
 }
 
-/*ーーーーーーーーーーーーーーーー*/
 /* メッセージ関連 */
 .message-wrapper {
     padding: 10px 30px;
@@ -171,19 +170,17 @@
 }
 
 .message-content img {
-    max-width: 100%;   /* 親要素の幅を超えない */
-    height: auto;      /* 縦横比維持 */
-    border-radius: 8px; /* 見た目を丸めたい場合 */
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
-/* メッセージ下のアクションボタン */
 .message-actions {
     display: flex;
     gap: 10px;
     margin-top: 6px;
 }
 
-/* 編集・削除ボタン統一 */
 .message-actions label.edit-btn,
 .message-actions form button.delete-btn {
     font-size: 15px;
@@ -197,7 +194,6 @@
     position: relative;
 }
 
-/* 編集・削除ボタン文字の影 */
 .message-actions label.edit-btn,
 .message-actions form button.delete-btn {
     font-size: 15px;
@@ -208,9 +204,7 @@
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-
-    /* 文字に影をつける */
-    text-shadow: 0px 4px 4px rgba(0,0,0,0.25); /* 右下に影 */
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
 /* チェックボックス非表示 */
@@ -232,7 +226,6 @@
     display: none;
 }
 
-/* 編集フォーム内のテキストエリア */
 .inline-edit-form textarea {
     width: 100%;
     min-height: 50px;
@@ -243,7 +236,6 @@
     margin-top: 4px;
 }
 
-/* 保存・キャンセル */
 .inline-edit-actions {
     display: flex;
     gap: 10px;
@@ -267,7 +259,6 @@
     cursor: pointer;
 }
 
-/*ーーーーーーーーーーーーーーーー*/
 /* 入力欄 */
 .error p {
     color: red;
@@ -275,26 +266,26 @@
 }
 .submit-box textarea {
     width: 100%;
-    max-width: 937px; /* 最大幅は保持 */
+    max-width: 937px;
 }
 
 .submit-form {
-     flex: 1; /* 横幅いっぱいに広げる */
+    flex: 1;
     display: flex;
-    flex-wrap: nowrap; /* 折り返し禁止 */
-    align-items: center; /* 垂直方向中央揃え */
+    flex-wrap: nowrap;
+    align-items: center;
     gap: 10px;
 }
 
 .submit-box textarea {
-    width: 937px; /* 幅を固定 */
+    width: 937px;
     height: 44px;
     padding: 8px 12px;
     font-size: 20px;
     line-height: 20px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    resize: none; /* 高さ変更不可 */
+    resize: none;
 }
 
 .submit-box textarea::placeholder {
@@ -319,22 +310,20 @@
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 10px; /* ボタン間のスペース */
+    margin-left: 10px;
 }
 
 .submit-btn {
     border: none;
-    background: none; /* 背景色を消す */
-    padding: 0; /* ボタン内の余白を消す */
+    background: none;
     margin: 0;
 }
 
 .submit-btn img {
     width: 80px;
-    display: block; /* 余白を消す */
+    display: block;
 }
 
-/*ーーーーーーーーーーーーーーーー*/
 /* モーダルウィンドウ */
 .complete-modal {
     position: fixed;
@@ -356,12 +345,11 @@
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* 幅は内部で100%に */
+    align-items: stretch;
     box-sizing: border-box;
-    padding: 0; /* 内側余白は個別に調整 */
+    padding: 0;
 }
 
-/* タイトル・サブタイトルは左揃え */
 .complete-title,
 .complete-subtitle {
     align-self: flex-start;
@@ -409,13 +397,13 @@
 
 .submit-wrapper {
     display: flex;
-    justify-content: flex-end; /* 横は右寄せ */
-    padding: 20px;            /* 上下左右の余白 */
+    justify-content: flex-end;
+    padding: 20px;
 }
 
 .complete-submit {
     width: 130px;
-    height: 50px; /* 元のボタンサイズに合わせる */
+    height: 50px;
     background: #FF8282;
     color: #fff;
     font-size: 24px;
@@ -426,7 +414,7 @@
 
 @media (max-width: 850px) {
     .layout {
-        flex-direction: column; /* 左サイドバーを上に回す */
+        flex-direction: column;
     }
 
     .aside {
@@ -452,7 +440,7 @@
     }
 
     .submit-box textarea {
-        width: 100%; /* 親に合わせる */
+        width: 100%;
         max-width: 100%;
     }
 

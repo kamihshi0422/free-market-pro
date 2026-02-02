@@ -159,13 +159,13 @@
 }
 
 .img-wrapper {
-    position: relative; /* ★ 基準 */
+    position: relative;
 }
 
 .unread-badge {
     position: absolute;
-    top: 6px;      /* 微調整OK */
-    left: 6px;     /* 微調整OK */
+    top: 6px;
+    left: 6px;
 
     min-width: 20px;
     height: 20px;
