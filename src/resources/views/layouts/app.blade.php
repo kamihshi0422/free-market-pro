@@ -20,7 +20,7 @@
                 !Request::is('login') &&
                 !Request::is('register') &&
                 !Request::is('email/verify*') &&
-                !Request::is('mypage/transaction*')
+                !Request::is('transaction*')
             )
                 <div class="layout-header-search">
                     <form action="{{ url('/') }}" method="GET" class="layout-header-search-form">
