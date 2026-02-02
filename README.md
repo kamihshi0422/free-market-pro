@@ -11,7 +11,7 @@
 1. phpコンテナへ入る
 ``` bash
 docker-compose exec php bash
-```
+```d
 
 2. `composer install`
 
@@ -68,10 +68,10 @@ php artisan migrate
 php artisan db:seed
 ```
 
-8. 出品画像、プロフィール画像のディレクトリ作成とサンプル画像の移動
+8. 出品画像、プロフィール画像用のディレクトリ作成とサンプル画像の移動
 
 - `mkdir -p src/storage/app/public`
-- `mv img products_images src/storage/app/public`
+- `mv img products_images user_images src/storage/app/public`
 - `mkdir src/storage/app/public/user_images`
 
 > _Permission denied（権限のエラー）が出た際、以下を実行してください。_
@@ -151,15 +151,31 @@ php artisan db:seed --env=testing
 php artisan test tests/Feature --env=testing
 ```
 
+## テストアカウント
+### name: ユーザー1
+- email: user1@example.com
+- password: password
+-------------------------
+### name: ユーザー2
+- email: user2@example.com
+- password: password
+-------------------------
+### name: ユーザー3
+- email: user3@example.com
+- password: password
+-------------------------
+
 ## URL
 - トップ画面 ：http://localhost/
 - 会員登録画面 :http://localhost/register
 - phpMyAdmin:：http://localhost:8080/
 - MailHog ：http://localhost:8025/
 
-## 追加機能の説明
-**コーチの確認・許可のもと、機能を加えています**
+## 補足 (Pro入会テスト)
+- 取引完了メールを確認する際は、MailHog（http://localhost:8025/）から確認いただけます。
 
+## 追加機能の説明(模擬試験１)
+**コーチの確認・許可のもと、機能を加えています**
 - メール認証画面で「認証はこちらから」ボタンを押下するとMailHog（http://localhost:8025/） に遷移し、認証するとプロフィール編集画面に遷移する。
 - 未承認ユーザーが認証が必要なアクションを行いログインした場合、元の画面に遷移する
   - 例：商品詳細画面で「いいね」後ログイン → 商品詳細画面に戻る
@@ -179,3 +195,211 @@ php artisan test tests/Feature --env=testing
 
 ## ER 図
 ![ER図](./ER.drawio.png)# free-market-pro
+
+## テーブル仕様書
+
+## 1. users テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | name | string |  |  | ○ |  |
+| 3 | email | string |  | ○ | ○ |  |
+| 4 | email_verified_at | timestamp |  |  |  |  |
+| 5 | password | string |  |  | ○ |  |
+| 6 | postcode | string |  |  |  |  |
+| 7 | address | string |  |  |  |  |
+| 8 | building | string |  |  |  |  |
+| 9 | img_url | string |  |  |  |  |
+|10 | remember_token | string |  |  |  |  |
+|11 | created_at | timestamp |  |  |  |  |
+|12 | updated_at | timestamp |  |  |  |  |
+
+
+## 2. products テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | user_id | unsigned bigint |  |  | ○ | users(id) |
+| 3 | condition_id | unsigned bigint |  |  | ○ | conditions(id) |
+| 4 | name | string |  |  | ○ |  |
+| 5 | brand_name | string |  |  |  |  |
+| 6 | price | integer |  |  | ○ |  |
+| 7 | img_url | string |  |  | ○ |  |
+| 8 | detail | text |  |  | ○ |  |
+| 9 | created_at | timestamp |  |  |  |  |
+|10 | updated_at | timestamp |  |  |  |  |
+
+
+## 3. categories テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | category | string |  |  | ○ |  |
+| 3 | created_at | timestamp |  |  |  |  |
+| 4 | updated_at | timestamp |  |  |  |  |
+
+
+## 4. category_product テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | product_id | unsigned bigint |  |  | ○ | products(id) |
+| 3 | category_id | unsigned bigint |  |  | ○ | categories(id) |
+| 4 | created_at | timestamp |  |  |  |  |
+| 5 | updated_at | timestamp |  |  |  |  |
+
+
+## 5. conditions テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | condition | string |  |  | ○ |  |
+| 3 | created_at | timestamp |  |  |  |  |
+| 4 | updated_at | timestamp |  |  |  |  |
+
+
+## 6. purchases テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | user_id | unsigned bigint |  |  | ○ | users(id) |
+| 3 | product_id | unsigned bigint |  |  | ○ | products(id) |
+| 4 | pay_method | tinyInteger |  |  | ○ |  |
+| 5 | address | string |  |  |  |  |
+| 6 | stripe_payment_intent_id | string |  |  |  |  |
+| 7 | created_at | timestamp |  |  |  |  |
+| 8 | updated_at | timestamp |  |  |  |  |
+
+
+## 7. comments テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | user_id | unsigned bigint |  |  | ○ | users(id) |
+| 3 | product_id | unsigned bigint |  |  | ○ | products(id) |
+| 4 | comment | text |  |  | ○ |  |
+| 5 | created_at | timestamp |  |  |  |  |
+| 6 | updated_at | timestamp |  |  |  |  |
+
+
+## 8. mylists テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | user_id | unsigned bigint |  |  | ○ | users(id) |
+| 3 | product_id | unsigned bigint |  |  | ○ | products(id) |
+| 4 | created_at | timestamp |  |  |  |  |
+| 5 | updated_at | timestamp |  |  |  |  |
+
+
+## 9. addresses テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | user_id | unsigned bigint |  |  | ○ | users(id) |
+| 3 | product_id | unsigned bigint |  |  | ○ | products(id) |
+| 4 | postcode | string |  |  | ○ |  |
+| 5 | address | string |  |  | ○ |  |
+| 6 | building | string |  |  |  |  |
+| 7 | created_at | timestamp |  |  |  |  |
+| 8 | updated_at | timestamp |  |  |  |  |
+
+
+## 10. transactions テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | product_id | unsigned bigint |  |  | ○ | products(id) |
+| 3 | buyer_id | unsigned bigint |  |  | ○ | users(id) |
+| 4 | seller_id | unsigned bigint |  |  | ○ | users(id) |
+| 5 | status | tinyInteger |  |  | ○ |  |
+| 6 | created_at | timestamp |  |  |  |  |
+| 7 | updated_at | timestamp |  |  |  |  |
+
+
+## 11. messages テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | transaction_id | unsigned bigint |  |  | ○ | transactions(id) |
+| 3 | user_id | unsigned bigint |  |  | ○ | users(id) |
+| 4 | message | text |  |  | ○ |  |
+| 5 | image_path | string |  |  |  |  |
+| 6 | is_read | boolean |  |  | ○ |  |
+| 7 | created_at | timestamp |  |  |  |  |
+| 8 | updated_at | timestamp |  |  |  |  |
+
+
+## 12. ratings テーブル
+| No. | カラム名 | 型 | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY |
+|-----|----------|----|-------------|------------|----------|-------------|
+| 1 | id | unsigned bigint | ○ |  | ○ |  |
+| 2 | transaction_id | unsigned bigint |  | ○ | ○ | transactions(id) |
+| 3 | from_user_id | unsigned bigint |  |  | ○ | users(id) |
+| 4 | to_user_id | unsigned bigint |  |  | ○ | users(id) |
+| 5 | score | unsignedTinyInteger |  |  | ○ |  |
+| 6 | created_at | timestamp |  |  |  |  |
+| 7 | updated_at | timestamp |  |  |  |  |
+
+## Tree
+```text
+.
+├── ER.drawio.png
+├── README.md
+├── docker
+│   ├── mysql
+│   ├── nginx
+│   └── php
+├── docker-compose.yml
+├── img
+│   └── logo.svg
+├── products_images
+│   ├── Armani+Mens+Clock.jpg
+│   ├── Armani+Mens+Clock.jpg:Zone.Identifier
+│   ├── DZfq97c6t736jEhEQtmC7cwGWo0MRVcmFhY9Okyt.png
+│   ├── HDD+Hard+Disk.jpg
+│   ├── HDD+Hard+Disk.jpg:Zone.Identifier
+│   ├── Leather+Shoes+Product+Photo.jpg
+│   ├── Leather+Shoes+Product+Photo.jpg:Zone.Identifier
+│   ├── Living+Room+Laptop.jpg
+│   ├── Living+Room+Laptop.jpg:Zone.Identifier
+│   ├── Music+Mic+4632231.jpg
+│   ├── Music+Mic+4632231.jpg:Zone.Identifier
+│   ├── NFdsmUJv3Lt7lGh4zESRUZLogAVW5aUBxQOZ2UaP.png
+│   ├── Purse+fashion+pocket.jpg
+│   ├── Purse+fashion+pocket.jpg:Zone.Identifier
+│   ├── Tumbler+souvenir.jpg
+│   ├── Tumbler+souvenir.jpg:Zone.Identifier
+│   ├── Waitress+with+Coffee+Grinder.jpg
+│   ├── Waitress+with+Coffee+Grinder.jpg:Zone.Identifier
+│   ├── comment.png
+│   ├── djoT7Wxqp4HmD6Zs5UoBGHGIjBVsUu2XArqQIZMq.png
+│   ├── iLoveIMG+d.jpg
+│   ├── iLoveIMG+d.jpg:Zone.Identifier
+│   ├── inputButton.jpg
+│   ├── like.png
+│   ├── p2TZGzgIrbZ0DHEH4l3DFXH21hdDrnvzsOj9bnRC.png
+│   ├── 外出メイクアップセット.jpg
+│   └── 外出メイクアップセット.jpg:Zone.Identifier
+├── src
+│   ├── app
+│   ├── artisan
+│   ├── bootstrap
+│   ├── composer.json
+│   ├── composer.lock
+│   ├── config
+│   ├── database
+│   ├── package.json
+│   ├── phpunit.xml
+│   ├── public
+│   ├── resources
+│   ├── routes
+│   ├── server.php
+│   ├── storage
+│   ├── tests
+│   ├── vendor
+│   └── webpack.mix.js
+└── user_images
+    ├── icon1.png
+    ├── icon2.png
+    └── icon3.png
