@@ -150,18 +150,31 @@ php artisan db:seed --env=testing
 php artisan test tests/Feature --env=testing
 ```
 
-## テストアカウント
+## テストアカウント (ダミーデータ)
 ### name: ユーザー1
 - email: user1@test.com
 - password: password
+- 出品商品:
+  - C001: 腕時計
+  - C002: HDD
+  - C003: 玉ねぎ3束
+  - C004: 革靴
+  - C005: ノートPC
 -------------------------
 ### name: ユーザー2
 - email: user2@test.com
 - password: password
+- 出品商品:
+  - C006: マイク
+  - C007: ショルダーバッグ
+  - C008: タンブラー
+  - C009: コーヒーミル
+  - C010: メイクセット
 -------------------------
 ### name: ユーザー3
 - email: user3@test.com
 - password: password
+- 出品商品: なし
 -------------------------
 
 ## URL
