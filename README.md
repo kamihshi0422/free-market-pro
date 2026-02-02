@@ -115,7 +115,7 @@ DB_PASSWORD=root
 
 3. テスト用DBを作成（ターミナルで実行）
 ``` bash
-docker exec -it free-market-mysql-1 mysql -u root -proot -e \
+docker exec -it free-market-pro-mysql-1 mysql -u root -proot -e \
 "CREATE DATABASE IF NOT EXISTS demo_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 GRANT ALL PRIVILEGES ON demo_test.* TO 'root'@'%';
 FLUSH PRIVILEGES;"
@@ -171,7 +171,7 @@ php artisan test tests/Feature --env=testing
 - MailHog ：http://localhost:8025/
 
 ## 補足 (Pro入会テスト)
-- 取引完了メールを確認する際は、MailHog（http://localhost:8025/）から確認いただけます。
+- 取引完了メールを確認する際は、MailHog（http://localhost:8025/） から確認いただけます。
 
 ## 追加機能の説明(模擬試験１)
 **コーチの確認・許可のもと、機能を加えています**

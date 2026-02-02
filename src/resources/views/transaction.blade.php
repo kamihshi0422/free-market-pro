@@ -90,7 +90,8 @@
                     @endif
                 </div>
             @endforeach
-
+        </div>
+        <div class="submit-box">
             {{-- エラーメッセージ --}}
             @if ($errors->any())
                 <div class="error">
@@ -99,20 +100,18 @@
                     @endforeach
                 </div>
             @endif
-            <div class="submit-box">
-                <form action="{{ route('transaction.message.store', $currentTransaction->id) }}" method="POST" enctype="multipart/form-data" class="submit-form">
-                    @csrf
+            <form action="{{ route('transaction.message.store', $currentTransaction->id) }}" method="POST" enctype="multipart/form-data" class="submit-form">
+                @csrf
 
-                    <textarea id="message" name="message" placeholder="取引メッセージを記入してください">{{ old('message', $draftMessage) }}</textarea>
+                <textarea id="message" name="message" placeholder="取引メッセージを記入してください">{{ old('message', $draftMessage) }}</textarea>
 
-                    <input type="file" name="image" id="image" accept=".png,.jpeg">
-                    <label for="image" class="image-add-btn">画像を追加</label>
+                <input type="file" name="image" id="image" accept=".png,.jpeg">
+                <label for="image" class="image-add-btn">画像を追加</label>
 
-                    <button type="submit" class="submit-btn">
-                        <img src="{{ asset('storage/products_images/inputButton.jpg') }}" alt="送信">
-                    </button>
-                </form>
-            </div>
+                <button type="submit" class="submit-btn">
+                    <img src="{{ asset('storage/products_images/inputButton.jpg') }}" alt="送信">
+                </button>
+            </form>
         </div>
     </section>
 
