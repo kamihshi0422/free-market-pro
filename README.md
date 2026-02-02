@@ -152,15 +152,15 @@ php artisan test tests/Feature --env=testing
 
 ## テストアカウント
 ### name: ユーザー1
-- email: user1@example.com
+- email: user1@test.com
 - password: password
 -------------------------
 ### name: ユーザー2
-- email: user2@example.com
+- email: user2@test.com
 - password: password
 -------------------------
 ### name: ユーザー3
-- email: user3@example.com
+- email: user3@test.com
 - password: password
 -------------------------
 
