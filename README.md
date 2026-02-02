@@ -11,7 +11,7 @@
 1. phpコンテナへ入る
 ``` bash
 docker-compose exec php bash
-```d
+```
 
 2. `composer install`
 
