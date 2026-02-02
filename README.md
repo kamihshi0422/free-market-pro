@@ -35,6 +35,12 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
 
+5. アプリケーションキーの作成
+
+``` bash
+php artisan key:generate
+```
+
 > _.env を変更した際、反映されないことがあるため、phpコンテナ内でまとめて以下を実行してください。_
 
 ``` bash
@@ -48,12 +54,6 @@ php artisan view:clear
 composer dump-autoload
 php artisan package:discover
 php artisan config:cache
-```
-
-5. アプリケーションキーの作成
-
-``` bash
-php artisan key:generate
 ```
 
 6. マイグレーションの実行
