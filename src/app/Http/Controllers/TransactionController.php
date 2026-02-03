@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Message;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -30,6 +31,11 @@ class TransactionController extends Controller
         $this->authorizeTransaction($transaction);
 
         $loginUserId = auth()->id();
+
+        Message::where('transaction_id', $transaction->id)
+            ->where('user_id', '!=', $loginUserId)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
 
         $currentTransaction = Transaction::with([
             'messages.user',
@@ -60,7 +66,6 @@ class TransactionController extends Controller
             ->where('from_user_id', $currentTransaction->seller_id)
             ->count() > 0;
 
-
         $showCompleteModal = false;
 
         if (
@@ -80,7 +85,6 @@ class TransactionController extends Controller
         ) {
             $showCompleteModal = true;
         }
-
 
         $completeActionRoute = null;
 

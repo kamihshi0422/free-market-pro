@@ -4,6 +4,7 @@
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
+    height: calc(100vh - 82px);
 }
 
 /* 左サイドバー */
@@ -16,7 +17,6 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     gap: 30px;
 }
@@ -44,10 +44,10 @@
 }
 
 .main {
-    flex: 1 1 0;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 82px);
+    overflow-y: auto;
 }
 
 .header {
@@ -116,7 +116,6 @@
 /* メッセージ関連 */
 .message-wrapper {
     flex: 1 1 auto;
-    overflow-y: auto;
     padding: 10px 30px;
 }
 
@@ -182,19 +181,6 @@
     display: flex;
     gap: 10px;
     margin-top: 6px;
-}
-
-.message-actions label.edit-btn,
-.message-actions form button.delete-btn {
-    font-size: 15px;
-    color: #5F5F5F;
-    background-color: #fff;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    position: relative;
 }
 
 .message-actions label.edit-btn,
@@ -273,21 +259,17 @@
     padding: 10px 30px;
 }
 
-.submit-box textarea {
-    width: 100%;
-    max-width: 937px;
-}
-
 .submit-form {
-    flex: 1;
+    width: 100%;
     display: flex;
-    flex-wrap: nowrap;
     align-items: center;
     gap: 10px;
 }
 
 .submit-box textarea {
-    width: 937px;
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
     height: 44px;
     padding: 8px 12px;
     font-size: 20px;
@@ -307,6 +289,11 @@
     display: none;
 }
 
+.image-add-btn,
+.submit-btn {
+    flex-shrink: 0;
+}
+
 .image-add-btn {
     display: inline-block;
     width: 143px;
@@ -319,7 +306,7 @@
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 0;
 }
 
 .submit-btn {
@@ -421,31 +408,85 @@
     cursor: pointer;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 860px) {
     .layout {
         flex-direction: column;
     }
 
     .aside {
         width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-        padding: 10px 0;
+        height: 80px;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .aside h1 {
+        display: block;
+        font-size: 16px;
+        color: #fff;
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    .aside a {
+        min-width: 160px;
+        height: 44px;
+        font-size: 18px;
+        white-space: nowrap;
     }
 
     .main {
-        width: 100%;
-        padding: 0 10px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 82px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .profile-box {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .profile-box h1 {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .complete-btn {
+        flex-shrink: 0;
     }
 
     .product-box {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        text-align: center;
+    }
+
+    .product-detail {
+        min-width: 0;
+        flex: 1;
     }
 
     .product-detail p {
         padding: 5px 0;
+    }
+
+    .product-name {
+        font-size: 28px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .product-price {
+        font-size: 22px;
     }
 
     .submit-box textarea {
@@ -454,7 +495,8 @@
     }
 
     .submit-form {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
         gap: 10px;
     }
 

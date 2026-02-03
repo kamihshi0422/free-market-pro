@@ -6,31 +6,33 @@
 
 @section('content')
 <div class="mypage-head">
-    <div class="user">
-        <div class="user-img">
-            @if(!empty($user->img_url))
-                <img src="{{ asset('storage/' . $user->img_url) }}" alt="">
-            @else
-                <div class="user-placeholder"></div>
-            @endif
-        </div>
+    <div class="mypage-head-inner">
+        <div class="user">
+            <div class="user-img">
+                @if(!empty($user->img_url))
+                    <img src="{{ asset('storage/' . $user->img_url) }}" alt="">
+                @else
+                    <div class="user-placeholder"></div>
+                @endif
+            </div>
 
-        <div class="user-info">
-            <h1 class="user-name">{{ $user->name }}</h1>
-            {{-- ユーザー評価 --}}
-            @if($ratingStats->count > 0)
-                <div class="user-rating">
-                    <p>
-                        @for ($rating = 1; $rating <= 5; $rating++)
-                            @if ($rating <= $ratingStats->average)
-                                <span class="star-filled">★</span>
-                            @else
-                                <span class="star-empty">★</span>
-                            @endif
-                        @endfor
-                    </p>
-</div>
-            @endif
+            <div class="user-info">
+                <h1 class="user-name">{{ $user->name }}</h1>
+                {{-- ユーザー評価 --}}
+                @if($ratingStats->count > 0)
+                    <div class="user-rating">
+                        <p>
+                            @for ($rating = 1; $rating <= 5; $rating++)
+                                @if ($rating <= $ratingStats->average)
+                                    <span class="star-filled">★</span>
+                                @else
+                                    <span class="star-empty">★</span>
+                                @endif
+                            @endfor
+                        </p>
+                    </div>
+                @endif
+            </div>
         </div>
         <a class="profile-edit-btn" href="{{ route('profile.edit') }}">プロフィールを編集</a>
     </div>

@@ -1,10 +1,15 @@
 .mypage-head {
+    width: 100%;
+    margin: 60px 0;
+}
+
+.mypage-head-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1017px;
-    gap: 50px;
-    margin: 60px auto;
 }
 
 .user {
@@ -55,19 +60,17 @@
     width: 310px;
     text-align: center;
     padding: 5px 20px;
-    margin-left: 200px;
 }
 
 .mypage-nav {
     display: flex;
     gap: 60px;
-    padding-left: 100px;
     border-bottom: 2px solid #5F5F5F;
+    padding-left: 100px;
 }
 
 .mypage-nav a {
     text-decoration: none;
-    width: 155px;
     height: 40px;
     font-size: 24px;
     color: #5F5F5F;
@@ -83,38 +86,32 @@
 }
 
 .mypage-nav .transaction-link {
-    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    width: 155px;
+    justify-content: flex-start;
+    width: auto;
     height: 40px;
-    line-height: 40px;
 
     white-space: nowrap;
     overflow: visible;
-    padding-right: 90px;
-    margin-left: 20px;
 }
 
 .mypage-nav .badge {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    width: 24px;
-    height: 24px;
+    position: relative;
+    margin-left: 6px;
+    top: 1px;
+    width: 27px;
+    height: 26px;
     border-radius: 10px;
 
-    background-color: red;
-    color: white;
-    font-size: 14px;
+    background-color: #FF0000;
+    color:#FFFFFF;
+    font-size: 24px;
     font-weight: bold;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
     z-index: 10;
 }
 
@@ -125,7 +122,6 @@
     margin: 80px auto 0;
     max-width: 1400px;
     justify-items: center;
-    padding: 0 20px;
 }
 
 .product-card {
@@ -134,8 +130,8 @@
 }
 
 .product-img {
-    width: 290px;
-    height: 290px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
@@ -184,15 +180,29 @@
     z-index: 5;
 }
 
-@media screen and (max-width: 1540px) {
-    .product-list {
-        gap: 70px 50px;
-    }
-}
-
-@media screen and (max-width: 1400px) {
-    .product-list {
-        grid-template-columns: repeat(3, 1fr);
+@media screen and (max-width: 860px) {
+    .mypage-head {
+        width: 100%;
+        max-width: none;
         padding: 0 40px;
+    }
+
+    .profile-edit-btn {
+        width: 250px;
+        font-size: 20px;
+        margin-left: 0;
+    }
+
+    .user-rating p {
+        font-size: 30px;
+    }
+
+    .mypage-nav {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

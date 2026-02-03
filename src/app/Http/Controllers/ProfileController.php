@@ -28,8 +28,9 @@ class ProfileController extends Controller
 
         $transactions = Transaction::with('product')
             ->withCount([
-                'messages as unread_messages_count' => function ($messageQuery) {
-                    $messageQuery->where('is_read', false);
+                'messages as unread_messages_count' => function ($query) use ($user) {
+                    $query->where('is_read', false)
+                        ->where('user_id', '!=', $user->id);
                 }
             ])
             ->with(['messages' => function ($messageQuery) {

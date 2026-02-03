@@ -105,7 +105,7 @@
 
                 <textarea id="message" name="message" placeholder="取引メッセージを記入してください">{{ old('message', $draftMessage) }}</textarea>
 
-                <input type="file" name="image" id="image" accept=".png,.jpeg">
+                <input type="file" name="image" id="image">
                 <label for="image" class="image-add-btn">画像を追加</label>
 
                 <button type="submit" class="submit-btn">
